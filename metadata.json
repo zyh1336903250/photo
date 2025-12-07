@@ -1,0 +1,7 @@
+{
+  "name": "GestureFlow Gallery",
+  "description": "A futuristic photo wall controlled by hand gestures using MediaPipe.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
