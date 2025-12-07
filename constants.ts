@@ -3,8 +3,8 @@ import { Photo } from './types';
 // ==========================================
 // [用户配置区] 默认照片数据
 // ==========================================
-const MY_PHOTOS_DATA = [
- 
+const MY_PHOTOS_DATA: {url: string, title: string, description: string}[] = [
+  // 默认留空，等待用户上传
 ];
 
 // 自动生成 Photo 对象结构

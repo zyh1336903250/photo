@@ -5,31 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GestureFlow Gallery</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              codemao: {
+                yellow: '#F9D423',
+                orange: '#FF9F1C',
+                white: '#FFFFFF',
+                dark: '#2D3436',
+                bg: '#FFFDF5'
+              }
+            },
+            fontFamily: {
+              sans: ['Nunito', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
     <style>
       body {
-        background-color: #050505;
-        color: #ffffff;
-        font-family: 'Inter', sans-serif;
+        background-color: #FFFDF5; /* Codemao light bg */
+        color: #2D3436;
+        font-family: 'Nunito', sans-serif;
         overflow-x: hidden;
         margin: 0;
       }
-      h1, h2, h3 {
-        font-family: 'Orbitron', sans-serif;
-      }
+      
       /* Hide scrollbar for cleaner look */
       ::-webkit-scrollbar {
         width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #0f0f0f;
+        background: #f1f1f1;
       }
       ::-webkit-scrollbar-thumb {
-        background: #333;
+        background: #FF9F1C;
         border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #00f3ff;
+        background: #F9D423;
       }
       
       /* Pre-loader styles */
@@ -40,32 +58,27 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: #050505;
+        background-color: #FFFDF5;
         z-index: 9999;
         transition: opacity 0.5s ease-out;
       }
-      .scanner {
-        width: 200px;
-        height: 2px;
-        background: #00f3ff;
-        box-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
-        animation: scan 2s infinite ease-in-out;
+      .loader-circle {
+        width: 60px;
+        height: 60px;
+        border: 8px solid #FFEAA7;
+        border-top: 8px solid #FF9F1C;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
       }
       .loading-text {
         margin-top: 20px;
-        font-family: 'Orbitron', monospace;
-        color: #00f3ff;
-        font-size: 14px;
-        letter-spacing: 4px;
-        animation: blink 1s infinite;
+        font-weight: 800;
+        color: #FF9F1C;
+        font-size: 18px;
       }
-      @keyframes scan {
-        0%, 100% { width: 0; opacity: 0; }
-        50% { width: 200px; opacity: 1; }
-      }
-      @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
     </style>
   <script type="importmap">
@@ -86,14 +99,10 @@
   <body>
     <div id="root">
       <div id="loader">
-        <div class="scanner"></div>
-        <div class="loading-text">SYSTEM INITIALIZING...</div>
+        <div class="loader-circle"></div>
+        <div class="loading-text">喵~ 正在加载资源...</div>
       </div>
     </div>
-    <!-- 
-      IMPORTANT: This script tag is required for Vite/Rollup/Webpack to find the entry point.
-      Without this, the screen will remain black on Vercel deployments.
-    -->
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>

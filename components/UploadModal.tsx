@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { X, Save, Image as ImageIcon } from 'lucide-react';
 
 interface UploadModalProps {
@@ -40,63 +40,59 @@ const UploadModal: React.FC<UploadModalProps> = ({ file, isOpen, onClose, onConf
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm" 
+        className="absolute inset-0 bg-codemao-yellow/30 backdrop-blur-sm" 
         onClick={onClose} 
       />
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-        className="relative bg-gray-900 w-full max-w-md border border-cyan-500/30 rounded-lg shadow-2xl shadow-cyan-500/10 overflow-hidden z-10"
+        className="relative bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden z-10 border-4 border-white"
       >
         {/* Header */}
-        <div className="bg-gray-800/50 p-4 border-b border-gray-700 flex justify-between items-center">
+        <div className="bg-codemao-orange p-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
-            <h2 className="text-cyan-400 font-orbitron tracking-wider">数据录入终端</h2>
+            <ImageIcon className="text-white" size={24} />
+            <h2 className="text-white font-bold text-lg">上传新照片</h2>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">
+          <button onClick={onClose} className="text-white/80 hover:text-white bg-white/20 hover:bg-white/30 rounded-full p-1 transition-colors">
             <X size={20} />
           </button>
         </div>
 
         {/* Content */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-6 space-y-5">
           {/* Image Preview */}
-          <div className="w-full h-32 bg-black rounded border border-gray-700 flex items-center justify-center overflow-hidden relative group">
+          <div className="w-full h-40 bg-gray-50 rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center overflow-hidden relative">
             {previewUrl && (
               <img 
                 src={previewUrl} 
                 alt="Preview" 
-                className="w-full h-full object-contain opacity-80" 
+                className="w-full h-full object-contain" 
               />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-2 left-2 text-xs font-mono text-cyan-300">
-              RAW_SIZE: {(file.size / 1024).toFixed(1)} KB
-            </div>
           </div>
 
           {/* Inputs */}
-          <div className="space-y-1">
-            <label className="text-xs text-gray-500 font-mono block">档案名称 // TITLE_ID</label>
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-gray-700 block">照片标题</label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full bg-black/50 border border-gray-700 rounded p-2 text-white focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all font-orbitron"
-              placeholder="输入标题..."
+              className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl p-3 text-gray-800 focus:border-codemao-orange focus:outline-none transition-all font-bold placeholder-gray-300"
+              placeholder="给照片起个好听的名字"
               required
             />
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs text-gray-500 font-mono block">数据描述 // DATA_DESC</label>
+          <div className="space-y-2">
+            <label className="text-sm font-bold text-gray-700 block">照片故事</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full bg-black/50 border border-gray-700 rounded p-2 text-gray-300 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all text-sm h-24 resize-none"
-              placeholder="输入关于这张照片的描述信息..."
+              className="w-full bg-gray-50 border-2 border-gray-200 rounded-xl p-3 text-gray-800 focus:border-codemao-orange focus:outline-none transition-all text-sm h-24 resize-none placeholder-gray-300"
+              placeholder="这张照片背后有什么有趣的故事吗？"
             />
           </div>
 
@@ -105,25 +101,19 @@ const UploadModal: React.FC<UploadModalProps> = ({ file, isOpen, onClose, onConf
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-2 border border-gray-600 rounded text-gray-400 hover:bg-gray-800 hover:text-white transition-colors font-mono text-xs"
+              className="flex-1 py-3 border-2 border-gray-200 rounded-xl text-gray-500 hover:border-gray-400 hover:text-gray-700 transition-colors font-bold"
             >
-              取消操作
+              取消
             </button>
             <button
               type="submit"
-              className="flex-1 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded shadow-[0_0_10px_rgba(8,145,178,0.4)] transition-all font-mono text-xs flex items-center justify-center gap-2"
+              className="flex-1 py-3 bg-codemao-orange hover:bg-orange-600 text-white rounded-xl shadow-lg shadow-orange-200 transition-all font-bold flex items-center justify-center gap-2 transform active:scale-95"
             >
-              <Save size={14} />
-              确认上传
+              <Save size={18} />
+              保存到相册
             </button>
           </div>
         </form>
-
-        {/* Decorative corner lines */}
-        <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-500" />
-        <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-cyan-500" />
-        <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-cyan-500" />
-        <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500" />
       </motion.div>
     </div>
   );

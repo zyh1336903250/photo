@@ -13,67 +13,61 @@ const GestureCursor: React.FC<GestureCursorProps> = ({ cursorState }) => {
     <motion.div
       className="fixed pointer-events-none z-[9999] flex items-center justify-center"
       animate={{
-        x: cursorState.x - 24, // Center slightly larger cursor
+        x: cursorState.x - 24,
         y: cursorState.y - 24,
-        scale: cursorState.isPinching ? 0.9 : 1,
+        scale: cursorState.isPinching ? 0.8 : 1,
       }}
       transition={{
         type: "spring",
-        damping: 25,
-        stiffness: 400,
-        mass: 0.2 // Low mass for responsiveness
+        damping: 20,
+        stiffness: 300,
+        mass: 0.1
       }}
       style={{
         width: 48,
         height: 48,
       }}
     >
-      {/* Outer Ring - Progress Indicator */}
-      <svg className="absolute inset-0 w-full h-full -rotate-90">
-        <circle
-          cx="24"
-          cy="24"
-          r="20"
-          fill="none"
-          stroke={cursorState.isPinching ? "#ec4899" : "#22d3ee"}
-          strokeWidth="2"
-          strokeOpacity="0.3"
+      {/* Friendly Bubbly Cursor */}
+      <div className={`relative w-full h-full rounded-full border-4 shadow-lg transition-colors duration-200 ${
+        cursorState.isPinching ? 'border-codemao-orange bg-codemao-orange/20' : 'border-codemao-yellow bg-white/20'
+      }`}>
+        
+        {/* Progress Ring */}
+        <svg className="absolute inset-0 w-full h-full -rotate-90 -m-1">
+          <circle
+            cx="24"
+            cy="24"
+            r="20"
+            fill="none"
+            stroke="transparent"
+            strokeWidth="4"
+          />
+          <motion.circle
+            cx="24"
+            cy="24"
+            r="20"
+            fill="none"
+            stroke={cursorState.isPinching ? "#FF9F1C" : "#F9D423"}
+            strokeWidth="4"
+            strokeLinecap="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: cursorState.pinchProgress }}
+            transition={{ duration: 0.1 }}
+          />
+        </svg>
+
+        {/* Center Dot */}
+        <div 
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-200 ${
+            cursorState.isPinching ? 'w-4 h-4 bg-codemao-orange' : 'w-2 h-2 bg-codemao-yellow'
+          }`} 
         />
-        <motion.circle
-          cx="24"
-          cy="24"
-          r="20"
-          fill="none"
-          stroke={cursorState.isPinching ? "#ec4899" : "#22d3ee"}
-          strokeWidth="3"
-          strokeLinecap="round"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: cursorState.pinchProgress }}
-          transition={{ duration: 0.1 }} // Immediate feedback
-          style={{
-            filter: `drop-shadow(0 0 ${cursorState.isPinching ? '10px' : '5px'} ${cursorState.isPinching ? '#ec4899' : '#22d3ee'})`
-          }}
-        />
-      </svg>
-      
-      {/* Center Reticle */}
-      <div 
-        className={`w-1 h-1 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-200 ${
-          cursorState.isPinching ? 'bg-pink-500 w-3 h-3' : 'bg-white'
-        }`} 
-      />
-      
-      {/* Crosshair decoration */}
-      <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-2 bg-current opacity-50 ${cursorState.isPinching ? 'text-pink-500' : 'text-cyan-400'}`}></div>
-      <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] h-2 bg-current opacity-50 ${cursorState.isPinching ? 'text-pink-500' : 'text-cyan-400'}`}></div>
-      <div className={`absolute left-0 top-1/2 -translate-y-1/2 h-[1px] w-2 bg-current opacity-50 ${cursorState.isPinching ? 'text-pink-500' : 'text-cyan-400'}`}></div>
-      <div className={`absolute right-0 top-1/2 -translate-y-1/2 h-[1px] w-2 bg-current opacity-50 ${cursorState.isPinching ? 'text-pink-500' : 'text-cyan-400'}`}></div>
+      </div>
 
       {/* Label */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 text-[10px] font-orbitron font-bold tracking-widest whitespace-nowrap">
-        <span className={cursorState.isPinching ? 'text-pink-400' : 'text-cyan-400/70'}>
-          {cursorState.isPinching ? '>> 执行指令 <<' : `强度: ${Math.round(cursorState.pinchProgress * 100)}%`}
-        </span>
+      <div className="absolute top-14 left-1/2 -translate-x-1/2 text-xs font-bold whitespace-nowrap bg-white px-2 py-1 rounded-full shadow-md text-codemao-orange">
+        {cursorState.isPinching ? '抓取中!' : '移动手势'}
       </div>
     </motion.div>
   );
