@@ -29,11 +29,11 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedPhoto, onClose }) => 
             exit={{ scale: 0.9, opacity: 0 }}
           >
             {/* Image Section */}
-            <div className="md:w-2/3 h-64 md:h-auto relative bg-black">
+            <div className="md:w-2/3 h-64 md:h-auto relative bg-black flex items-center justify-center">
               <motion.img
                 layoutId={`photo-image-${selectedPhoto.id}`}
                 src={selectedPhoto.url}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain max-h-[60vh] md:max-h-full"
                 alt={selectedPhoto.title}
               />
               
@@ -46,7 +46,7 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedPhoto, onClose }) => 
             </div>
 
             {/* Content Section */}
-            <div className="md:w-1/3 p-8 flex flex-col border-l border-gray-800 bg-gray-900/95">
+            <div className="md:w-1/3 p-8 flex flex-col border-l border-gray-800 bg-gray-900/95 overflow-y-auto">
               <div className="mb-6">
                  <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
                   {selectedPhoto.title}
@@ -56,24 +56,24 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedPhoto, onClose }) => 
                   <span className="px-2 py-1 bg-gray-800 rounded">RAW</span>
                 </div>
                 
-                <p className="text-gray-300 leading-relaxed mb-6">
-                  这是一张展示了未来美学的杰作。在这张照片中，光影的交错与构图的平衡达到了完美的和谐。通过手势控制，你已成功解锁了这张照片的详细信息。
+                <p className="text-gray-300 leading-relaxed mb-6 font-light">
+                  {selectedPhoto.description || "暂无描述信息。通过手势控制，你已成功解锁了这张照片的详细信息。"}
                 </p>
                 
                 <div className="space-y-4">
                   <div className="flex items-center text-gray-400 text-sm">
                     <Info size={16} className="mr-3 text-cyan-400" />
-                    <span>分辨率: 4K Ultra HD</span>
+                    <span>分辨率: 高清渲染</span>
                   </div>
                    <div className="flex items-center text-gray-400 text-sm">
                     <Heart size={16} className="mr-3 text-pink-500" />
-                    <span>喜欢: 1,204</span>
+                    <span>热度指数: {Math.floor(Math.random() * 2000) + 500}</span>
                   </div>
                 </div>
               </div>
 
               <div className="mt-auto pt-6 border-t border-gray-800 flex space-x-4">
-                <button className="flex-1 py-3 px-4 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg transition-colors flex items-center justify-center space-x-2">
+                <button className="flex-1 py-3 px-4 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg transition-colors flex items-center justify-center space-x-2 shadow-[0_0_15px_rgba(8,145,178,0.3)]">
                   <Share2 size={18} />
                   <span>分享</span>
                 </button>

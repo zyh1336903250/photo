@@ -25,7 +25,7 @@ export const useHandTracking = () => {
 
   const lastCursorRef = useRef({ x: 0, y: 0 });
   const handLandmarkerRef = useRef<HandLandmarker | null>(null);
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number>(0);
   const isPinchingRef = useRef(false); // To handle hysteresis inside the loop without react state lag
 
   useEffect(() => {

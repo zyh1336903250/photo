@@ -29,7 +29,6 @@ const GestureCursor: React.FC<GestureCursorProps> = ({ cursorState }) => {
       }}
     >
       {/* Outer Ring - Progress Indicator */}
-      {/* We use SVG stroke-dasharray to animate the circle filling up based on pinch distance */}
       <svg className="absolute inset-0 w-full h-full -rotate-90">
         <circle
           cx="24"
@@ -73,7 +72,7 @@ const GestureCursor: React.FC<GestureCursorProps> = ({ cursorState }) => {
       {/* Label */}
       <div className="absolute top-12 left-1/2 -translate-x-1/2 text-[10px] font-orbitron font-bold tracking-widest whitespace-nowrap">
         <span className={cursorState.isPinching ? 'text-pink-400' : 'text-cyan-400/70'}>
-          {cursorState.isPinching ? '>> EXECUTE <<' : `${Math.round(cursorState.pinchProgress * 100)}%`}
+          {cursorState.isPinching ? '>> 执行指令 <<' : `强度: ${Math.round(cursorState.pinchProgress * 100)}%`}
         </span>
       </div>
     </motion.div>

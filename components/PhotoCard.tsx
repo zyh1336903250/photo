@@ -118,9 +118,9 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo, isHovered, onClick }) => {
           className="flex justify-between items-end"
         >
             <p className="text-[10px] text-gray-400 font-mono tracking-tighter">
-                IMG_DATA_BLOCK_{photo.id.split('-')[1]}
+                数据区块_{photo.id.split('-')[1] || '001'}
             </p>
-            {isHovered && <span className="text-[10px] text-cyan-400 font-mono animate-pulse">Ready</span>}
+            {isHovered && <span className="text-[10px] text-cyan-400 font-mono animate-pulse">就绪</span>}
         </motion.div>
       </div>
 
