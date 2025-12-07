@@ -5,9 +5,9 @@ import { Photo } from './types';
 // ==========================================
 const MY_PHOTOS_DATA = [
   {
-    url: "https://images.unsplash.com/photo-1515630278258-407f66498911?auto=format&fit=crop&w=800&q=80",
-    title: "霓虹街区",
-    description: "2077年的夜之城，数据流在雨夜中穿梭。"
+    url: "https://codemaopic.oss-cn-beijing.aliyuncs.com/pic/%E5%88%98%E9%91%AB.png?Expires=1765105466&OSSAccessKeyId=TMP.3KsUJ8VypdSgw8FmybQiAKJgpB9vnKMFzxE6tubS7ybhZfg5d7QzQgfU9RMP7bTHxejybTz7M8GdNa5V6ZZwBCAdmAVXKN&Signature=aZEnaE89POGuLT06gIDdamtqc7c%3D",
+    title: "刘鑫老师",
+    description: "当时孩子不太喜欢上编程课，然后我打了视频过去，后面孩子上课积极后家长的反馈"
   },
   {
     url: "https://images.unsplash.com/photo-1573455494060-c5595004fb6c?auto=format&fit=crop&w=800&q=80",
